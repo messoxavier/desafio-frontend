@@ -1,6 +1,5 @@
-// src/pages/CadastrarProfessor/CadastrarProfessor.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 
 const CadastrarProfessor = () => {
@@ -12,10 +11,9 @@ const CadastrarProfessor = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch the list of schools from the backend
     const fetchEscolas = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/escolas');
+        const response = await axiosInstance.get('/escolas');
         setEscolas(response.data);
       } catch (error) {
         console.error('Erro ao buscar escolas:', error);
@@ -28,11 +26,11 @@ const CadastrarProfessor = () => {
   const handleCadastro = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/professores', {
+      await axiosInstance.post('/professores', {
         nome,
         cpf,
         data_nascimento: dataNascimento,
-        id_escola: idEscola,
+        escola_id: idEscola,
       });
       navigate('/professores');
     } catch (error) {

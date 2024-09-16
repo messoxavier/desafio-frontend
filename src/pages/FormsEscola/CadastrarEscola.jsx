@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../api/axios';
 
 const CadastrarEscola = () => {
   const [nome, setNome] = useState('');
@@ -10,7 +10,7 @@ const CadastrarEscola = () => {
   const handleCadastro = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/escolas', { nome, endereco });
+      await axiosInstance.post('/escolas', { nome, endereco });
       navigate('/escolas');
     } catch (error) {
       console.error('Erro ao cadastrar escola:', error);
