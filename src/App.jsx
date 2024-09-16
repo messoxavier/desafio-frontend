@@ -12,7 +12,7 @@ import CadastrarAluno from './pages/FormsAluno/CadastrarAluno';
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Signin />} />
+      <Route path="/" element={<Signin />} />
       <Route path="/cadastro" element={<Signup />} />
       <Route path="/home" element={<Home />} />
       <Route path="/escolas" element={<Escolas />} />

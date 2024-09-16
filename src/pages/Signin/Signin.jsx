@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../../api/axios';
 
 const Signin = () => {
   const [cpf, setCpf] = useState('');
@@ -12,24 +12,19 @@ const Signin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    try {
+      const response = await axiosInstance.post('/auth/login', { cpf, senha });
+      localStorage.setItem('token', response.data.token);
+      navigate('/home');
+    } catch (error) {
+      setErro('Credenciais inválidas');
+    }
 
     if (cpf === '' || senha === '') {
       setErro('Por favor, preencha todos os campos.');
     } else {
-      setErro('');
+      setErro('CPF ou senha incorretos!');
     }
-
-    await axios.post(
-      "http://localhost:5000/api/auth/login",
-       {
-        cpf, senha
-       } 
-    ).then(response => {
-      console.log(response.data.token)
-      if(response.data.token != ""){
-        navigate("/home");
-      } 
-    } ).catch(setErro('Usuário ou senha inválido.'))
 
   };
 
