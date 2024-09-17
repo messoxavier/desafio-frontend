@@ -43,6 +43,7 @@ const Signup = () => {
               onChange={(e) => setNome(e.target.value)}
               className="w-full px-3 py-2 border rounded"
               placeholder="Digite seu nome"
+              required
             />
           </div>
           <div className="mb-4">
@@ -53,6 +54,7 @@ const Signup = () => {
               onChange={(e) => setCpf(e.target.value)}
               className="w-full px-3 py-2 border rounded"
               placeholder="Digite seu CPF"
+              required
             />
           </div>
           <div className="mb-4">
@@ -63,6 +65,7 @@ const Signup = () => {
               onChange={(e) => setSenha(e.target.value)}
               className="w-full px-3 py-2 border rounded"
               placeholder="Digite sua senha"
+              required
             />
           </div>
           <div className="mb-4">
@@ -72,6 +75,7 @@ const Signup = () => {
               value={data_nascimento}
               onChange={(e) => setDataNascimento(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              required
             />
           </div>
           <button
