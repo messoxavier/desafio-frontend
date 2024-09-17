@@ -1,6 +1,5 @@
-// src/pages/CadastrarAluno/CadastrarAluno.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 
 const CadastrarAluno = () => {
@@ -12,10 +11,9 @@ const CadastrarAluno = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch the list of teachers from the backend
     const fetchProfessores = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/professores');
+        const response = await axiosInstance.get('/professores');
         setProfessores(response.data);
       } catch (error) {
         console.error('Erro ao buscar professores:', error);
@@ -28,11 +26,11 @@ const CadastrarAluno = () => {
   const handleCadastro = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/alunos', {
+      await axiosInstance.post('/alunos', {
         nome,
         cpf,
         data_nascimento: dataNascimento,
-        id_professor: idProfessor,
+        professor_id: idProfessor,
       });
       navigate('/alunos');
     } catch (error) {

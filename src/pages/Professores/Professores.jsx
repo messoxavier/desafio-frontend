@@ -53,7 +53,7 @@ const Professores = () => {
                 <td className="p-4 border-b">{professor.nome}</td>
                 <td className="p-4 border-b">{professor.cpf}</td>
                 <td className="p-4 border-b">{formatDate(professor.data_nascimento)}</td>
-                <td className="p-4 border-b">{professor.escola_id}</td>
+                <td className="p-4 border-b">{professor.escola_nome}</td>
               </tr>
             ))}
           </tbody>

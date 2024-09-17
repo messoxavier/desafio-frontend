@@ -10,7 +10,10 @@ const CadastrarEscola = () => {
   const handleCadastro = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post('/escolas', { nome, endereco });
+      await axiosInstance.post('/escolas', {
+        nome,
+        endereco
+       });
       navigate('/escolas');
     } catch (error) {
       console.error('Erro ao cadastrar escola:', error);
