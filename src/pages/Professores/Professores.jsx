@@ -32,9 +32,9 @@ const Professores = () => {
 
   const handleDelete = async () => {
     try {
-      await axiosInstance.delete(`/professores/${id}`);
+      await axiosInstance.delete(`/professores/${selectedId}`);
       setProfessores(professores.filter(professor => professor.id !== selectedId));
-      setIsMOdalOpen(false);
+      setIsModalOpen(false);
     } catch (error) {
       console.error('Erro ao deletar professor:', error);
     }
