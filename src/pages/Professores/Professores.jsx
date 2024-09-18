@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/axios';
 import { Link } from 'react-router-dom';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import ModalDelete from '../../components/ModalDelete/ModalDelete';
 
 const Professores = () => {
   const [professores, setProfessores] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Professores - Desafio';
@@ -20,13 +26,27 @@ const Professores = () => {
     fetchProfessores();
   }, []);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
+  const handleEdit = (id) => {
+    navigate(`/editar-professor/${id}`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosInstance.delete(`/professores/${id}`);
+      setProfessores(professores.filter(professor => professor.id !== selectedId));
+      setIsMOdalOpen(false);
+    } catch (error) {
+      console.error('Erro ao deletar professor:', error);
+    }
+  };
+
+  const openModal = (id) => {
+    setSelectedId(id);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -46,6 +66,7 @@ const Professores = () => {
               <th className="p-4 border-b text-left">CPF</th>
               <th className="p-4 border-b text-left">Data de Nascimento</th>
               <th className="p-4 border-b text-left">Escola</th>
+              <th className="p-4 border-b text-left">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -54,13 +75,32 @@ const Professores = () => {
                 <td className="p-4 border-b">{professor.id}</td>
                 <td className="p-4 border-b">{professor.nome}</td>
                 <td className="p-4 border-b">{professor.cpf}</td>
-                <td className="p-4 border-b">{formatDate(professor.data_nascimento)}</td>
+                <td className="p-4 border-b">{new Date(professor.data_nascimento).toLocaleDateString('pt-BR')}</td>
                 <td className="p-4 border-b">{professor.escola_nome}</td>
+                <td className="p-4 border-b">
+                  <button 
+                    onClick={() => handleEdit(professor.id)}
+                    className="text-blue-500 hover:text-blue-700 mx-2">
+                      <FaEdit />
+                  </button>
+                  <button 
+                    onClick={() => openModal(professor.id) }
+                    className="text-red-500 hover:text-red-700 mx-2"
+                  >
+                    <FaTrash />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      <ModalDelete
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={handleDelete}
+      />
     </div>
   );
 };

@@ -75,7 +75,7 @@ const CadastrarProfessor = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">ID da Escola</label>
+          <label className="block text-gray-700">Escola</label>
           <select
             value={idEscola}
             onChange={(e) => setIdEscola(e.target.value)}
