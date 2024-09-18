@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../api/axios';
@@ -8,6 +8,10 @@ const Signin = () => {
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = 'Login - Desafio';
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();

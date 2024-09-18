@@ -6,6 +6,8 @@ const Alunos = () => {
   const [alunos, setAlunos] = useState([]);
 
   useEffect(() => {
+    document.title = 'Alunos - Desafio';
+
     const fetchAlunos = async () => {
       try {
         const response = await axiosInstance.get('/alunos');

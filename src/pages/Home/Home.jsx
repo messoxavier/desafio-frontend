@@ -1,10 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { FaSchool, FaChalkboardTeacher, FaUserGraduate } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = 'Home - Desafio';
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');

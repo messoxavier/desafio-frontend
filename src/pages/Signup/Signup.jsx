@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/axios';
 
@@ -9,6 +9,10 @@ const Signup = () => {
   const [data_nascimento, setDataNascimento] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = 'Cadastro - Desafio';
+  }, []);
 
   const handleCadastro = async (e) => {
     e.preventDefault();

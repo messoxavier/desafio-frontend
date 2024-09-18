@@ -6,6 +6,8 @@ const Professores = () => {
   const [professores, setProfessores] = useState([]);
 
   useEffect(() => {
+    document.title = 'Professores - Desafio';
+
     const fetchProfessores = async () => {
       try {
         const response = await axiosInstance.get('/professores');
