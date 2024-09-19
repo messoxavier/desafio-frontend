@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/axios';
 import { Link } from 'react-router-dom';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaInfoCircle } from 'react-icons/fa';
 import ModalDelete from '../../components/ModalDelete/ModalDelete';
 
 const Alunos = () => {
@@ -38,16 +38,16 @@ const Alunos = () => {
     } catch (error) {
       console.error('Erro ao deletar aluno:', error);
     }
-  }
+  };
 
   const openModal = (id) => {
     setSelectedId(id);
     setIsModalOpen(true);
-  }
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
-  }
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -79,28 +79,41 @@ const Alunos = () => {
             </tr>
           </thead>
           <tbody>
-            {alunos.map((aluno) => (
-              <tr key={aluno.id}>
-                <td className="p-4 border-b">{aluno.id}</td>
-                <td className="p-4 border-b">{aluno.nome}</td>
-                <td className="p-4 border-b">{aluno.cpf}</td>
-                <td className="p-4 border-b">{formatDate(aluno.data_nascimento)}</td>
-                <td className="p-4 border-b">{aluno.professores_nome}</td>
-                <td className="p-4 border-b">
-                  <button 
-                    onClick={() => handleEdit(aluno.id)}
-                    className="text-blue-500 hover:text-blue-700 mx-2">
-                      <FaEdit />
-                  </button>
-                  <button 
-                    onClick={() => openModal(aluno.id) }
-                    className="text-red-500 hover:text-red-700 mx-2"
-                  >
-                    <FaTrash />
-                  </button>
+            {alunos.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="p-6 text-center text-gray-600 bg-gray-200">
+                  <div className="flex items-center justify-center space-x-2">
+                    <FaInfoCircle className="text-blue-500 text-2xl" />
+                    <span className="font-semibold text-lg">
+                      Não há alunos cadastrados ainda...
+                    </span>
+                  </div>
                 </td>
               </tr>
-            ))}
+            ) : (
+              alunos.map((aluno) => (
+                <tr key={aluno.id}>
+                  <td className="p-4 border-b">{aluno.id}</td>
+                  <td className="p-4 border-b">{aluno.nome}</td>
+                  <td className="p-4 border-b">{aluno.cpf}</td>
+                  <td className="p-4 border-b">{formatDate(aluno.data_nascimento)}</td>
+                  <td className="p-4 border-b">{aluno.professores_nome}</td>
+                  <td className="p-4 border-b">
+                    <button 
+                      onClick={() => handleEdit(aluno.id)}
+                      className="text-blue-500 hover:text-blue-700 mx-2">
+                        <FaEdit />
+                    </button>
+                    <button 
+                      onClick={() => openModal(aluno.id) }
+                      className="text-red-500 hover:text-red-700 mx-2"
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

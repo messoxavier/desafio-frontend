@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/axios';
-import axios from 'axios';
 
 const EditarAluno = () => {
     const { id } = useParams();
@@ -14,6 +13,7 @@ const EditarAluno = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = 'Editar aluno - Desafio';
         const fetchAlunos = async () => {
             try {
                 const response = await axiosInstance.get(`/alunos/${id}`);

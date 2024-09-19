@@ -14,6 +14,7 @@ const EditarProfessor = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Editar professor - Desafio';
     const fetchProfessor = async () => {
       try {
         const response = await axiosInstance.get(`/professores/${id}`);

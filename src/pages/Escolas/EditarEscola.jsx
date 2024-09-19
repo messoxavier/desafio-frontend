@@ -10,6 +10,7 @@ const EditarEscola = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Editar escola - Desafio';
     const fetchEscola = async () => {
       try {
         const response = await axiosInstance.get(`/escolas/${id}`);

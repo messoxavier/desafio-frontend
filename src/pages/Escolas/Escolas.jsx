@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../api/axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaInfoCircle } from 'react-icons/fa';
 import ModalDelete from '../../components/ModalDelete/ModalDelete';
 
 const Escolas = () => {
@@ -11,6 +11,7 @@ const Escolas = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Escolas - Desafio';
     const fetchEscolas = async () => {
       try {
         const response = await axiosInstance.get('/escolas');
@@ -54,6 +55,7 @@ const Escolas = () => {
           Cadastrar Escola
         </button>
       </Link>
+
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white shadow-md rounded">
           <thead>
@@ -65,27 +67,40 @@ const Escolas = () => {
             </tr>
           </thead>
           <tbody>
-            {escolas.map((escola) => (
-              <tr key={escola.id}>
-                <td className="p-4 border-b">{escola.id}</td>
-                <td className="p-4 border-b">{escola.nome}</td>
-                <td className="p-4 border-b">{escola.endereco}</td>
-                <td className="p-4 border-b">
-                  <button 
-                    onClick={() => handleEdit(escola.id)} 
-                    className="text-blue-500 hover:text-blue-700 mx-2"
-                  >
-                    <FaEdit />
-                  </button>
-                  <button 
-                    onClick={() => openModal(escola.id)} 
-                    className="text-red-500 hover:text-red-700 mx-2"
-                  >
-                    <FaTrash />
-                  </button>
+            {escolas.length === 0 ? (
+              <tr>
+                <td colSpan="4" className="p-6 text-center text-gray-600 bg-gray-200">
+                  <div className="flex items-center justify-center space-x-2">
+                    <FaInfoCircle className="text-blue-500 text-2xl" />
+                    <span className="font-semibold text-lg">
+                      Não há escolas cadastradas ainda...
+                    </span>
+                  </div>
                 </td>
               </tr>
-            ))}
+            ) : (
+              escolas.map((escola) => (
+                <tr key={escola.id}>
+                  <td className="p-4 border-b">{escola.id}</td>
+                  <td className="p-4 border-b">{escola.nome}</td>
+                  <td className="p-4 border-b">{escola.endereco}</td>
+                  <td className="p-4 border-b">
+                    <button 
+                      onClick={() => handleEdit(escola.id)} 
+                      className="text-blue-500 hover:text-blue-700 mx-2"
+                    >
+                      <FaEdit />
+                    </button>
+                    <button 
+                      onClick={() => openModal(escola.id)} 
+                      className="text-red-500 hover:text-red-700 mx-2"
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

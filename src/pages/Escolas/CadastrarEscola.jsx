@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/axios';
 
@@ -7,6 +7,10 @@ const CadastrarEscola = () => {
   const [endereco, setEndereco] = useState('');
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = 'Cadastrar escola - Desafio';
+  }, []);
 
   const handleCadastro = async (e) => {
     e.preventDefault();

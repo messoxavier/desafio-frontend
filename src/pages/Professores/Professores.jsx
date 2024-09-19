@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/axios';
 import { Link } from 'react-router-dom';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaInfoCircle } from 'react-icons/fa';
 import ModalDelete from '../../components/ModalDelete/ModalDelete';
 
 const Professores = () => {
@@ -70,28 +70,41 @@ const Professores = () => {
             </tr>
           </thead>
           <tbody>
-            {professores.map((professor) => (
-              <tr key={professor.id}>
-                <td className="p-4 border-b">{professor.id}</td>
-                <td className="p-4 border-b">{professor.nome}</td>
-                <td className="p-4 border-b">{professor.cpf}</td>
-                <td className="p-4 border-b">{new Date(professor.data_nascimento).toLocaleDateString('pt-BR')}</td>
-                <td className="p-4 border-b">{professor.escola_nome}</td>
-                <td className="p-4 border-b">
-                  <button 
-                    onClick={() => handleEdit(professor.id)}
-                    className="text-blue-500 hover:text-blue-700 mx-2">
-                      <FaEdit />
-                  </button>
-                  <button 
-                    onClick={() => openModal(professor.id) }
-                    className="text-red-500 hover:text-red-700 mx-2"
-                  >
-                    <FaTrash />
-                  </button>
+            {professores.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="p-6 text-center text-gray-600 bg-gray-200">
+                  <div className="flex items-center justify-center space-x-2">
+                    <FaInfoCircle className="text-blue-500 text-2xl" />
+                    <span className="font-semibold text-lg">
+                      Não há professores cadastrados ainda...
+                    </span>
+                  </div>
                 </td>
               </tr>
-            ))}
+            ) : (
+              professores.map((professor) => (
+                <tr key={professor.id}>
+                  <td className="p-4 border-b">{professor.id}</td>
+                  <td className="p-4 border-b">{professor.nome}</td>
+                  <td className="p-4 border-b">{professor.cpf}</td>
+                  <td className="p-4 border-b">{new Date(professor.data_nascimento).toLocaleDateString('pt-BR')}</td>
+                  <td className="p-4 border-b">{professor.escola_nome}</td>
+                  <td className="p-4 border-b">
+                    <button 
+                      onClick={() => handleEdit(professor.id)}
+                      className="text-blue-500 hover:text-blue-700 mx-2">
+                        <FaEdit />
+                    </button>
+                    <button 
+                      onClick={() => openModal(professor.id) }
+                      className="text-red-500 hover:text-red-700 mx-2"
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

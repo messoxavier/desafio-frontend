@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { FaSchool, FaChalkboardTeacher, FaUserGraduate } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -28,6 +27,7 @@ const Home = () => {
         </button>
       </header>
       <main className="flex flex-col items-center justify-center flex-grow p-8">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">O que você deseja?</h2>
         <div className="flex flex-col sm:flex-row sm:space-x-16 space-y-8 sm:space-y-0">
           <Link to="/escolas" className="flex flex-col items-center space-y-4 bg-blue-100 p-6 rounded-lg shadow-md">
             <div className="bg-blue-200 p-4 rounded-full">

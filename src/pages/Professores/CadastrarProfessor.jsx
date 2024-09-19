@@ -13,6 +13,7 @@ const CadastrarProfessor = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Cadastrar professor - Desafio';
     const fetchEscolas = async () => {
       try {
         const response = await axiosInstance.get('/escolas');
