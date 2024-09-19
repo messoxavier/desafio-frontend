@@ -10,6 +10,7 @@ import CadastrarProfessor from './pages/Professores/CadastrarProfessor';
 import CadastrarAluno from './pages/Alunos/CadastrarAluno';
 import EditarEscola from './pages/Escolas/EditarEscola';
 import EditarProfessor from './pages/Professores/EditarProfessor';
+import EditarAluno from './pages/Alunos/EditarAluno';
 import PrivateRoute from './Routes/PrivateRoute';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/cadastrar-aluno" element={<CadastrarAluno />} />
         <Route path="/editar-escola/:id" element={<EditarEscola/>} />
         <Route path="/editar-professor/:id" element={<EditarProfessor/>} />
+        <Route path="/editar-aluno/:id" element={<EditarAluno/>} />
       </Route>
     </Routes>
   );

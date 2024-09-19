@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const CadastrarProfessor = () => {
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
+  const [senha, setSenha] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
   const [idEscola, setIdEscola] = useState('');
   const [escolas, setEscolas] = useState([]);
@@ -30,6 +31,7 @@ const CadastrarProfessor = () => {
       await axiosInstance.post('/professores', {
         nome,
         cpf,
+        senha,
         data_nascimento: dataNascimento,
         escola_id: idEscola,
       });
@@ -98,6 +100,17 @@ const CadastrarProfessor = () => {
             required
           />
         </div>
+        <div className="mb-4">
+            <label className="block text-gray-700">Senha</label>
+            <input
+              type="password"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+              placeholder="Digite uma senha"
+              required
+            />
+          </div>
         <div className="mb-4">
           <label className="block text-gray-700">Data de Nascimento</label>
           <input

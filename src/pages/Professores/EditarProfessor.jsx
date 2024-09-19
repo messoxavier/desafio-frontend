@@ -6,6 +6,7 @@ const EditarProfessor = () => {
   const { id } = useParams();
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
+  const [senha, setSenha] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
   const [escolaId, setEscolaId] = useState('');
   const [escolas, setEscolas] = useState([]);
@@ -22,6 +23,7 @@ const EditarProfessor = () => {
 
         setNome(professor.nome);
         setCpf(professor.cpf);
+        setSenha(professor.senha);
         setDataNascimento(dataNascimentoFormatada);
         setEscolaId(professor.escola_id);
       } catch (error) {
@@ -48,7 +50,8 @@ const EditarProfessor = () => {
       await axiosInstance.put(`/professores/${id}`, {
         nome,
         cpf,
-        data_nascimento: dataNascimento,
+        senha,
+        data_nascimento: dataNascimento,  
         escola_id: escolaId
       });
       setShowModal(true);
@@ -111,6 +114,17 @@ const EditarProfessor = () => {
             required
           />
         </div>
+        <div className="mb-4">
+            <label className="block text-gray-700">Senha</label>
+            <input
+              type="password"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+              placeholder="Digite uma senha"
+              required
+            />
+          </div>
         <div className="mb-4">
           <label className="block text-gray-700">Data de Nascimento</label>
           <input
